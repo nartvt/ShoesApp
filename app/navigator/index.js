@@ -17,29 +17,56 @@ const Stack = createStackNavigator();
 const BottomTab = () => {
   return (
     <Tabs.Navigator
-      screenOptions={{
-        title: '',
+      tabBarOptions={{
+        showLabel: false,
+        activeTintColor: 'red',
+        inactiveTintColor: 'grey',
       }}>
       <Tabs.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarIcon: () => <AntDesignIcon name="home" size={25} />,
+          tabBarIcon: ({color}) => (
+            <AntDesignIcon name="home" size={25} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="Favorite"
         component={FavoriteScreen}
         options={{
-          tabBarIcon: () => <AntDesignIcon name="hearto" size={25} />,
+          tabBarIcon: ({color}) => (
+            <AntDesignIcon name="hearto" size={25} color={color} />
+          ),
         }}
       />
-      <Tabs.Screen name="Cart" component={CartScreen} 
-            options={{
-          tabBarIcon: () => <AntDesignIcon name="hearto" size={25} />,
+      <Tabs.Screen
+        name="Home-a"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({color}) => (
+            <AntDesignIcon name="aliwangwang" size={25} color={color} />
+          ),
         }}
       />
-      <Tabs.Screen name="Profile" component={ProfileScreen} />
+      <Tabs.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{
+          tabBarIcon: ({color}) => (
+            <AntDesignIcon name="shoppingcart" size={25} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({color}) => (
+            <AntDesignIcon name="user" size={25} color={color} />
+          ),
+        }}
+      />
     </Tabs.Navigator>
   );
 };
