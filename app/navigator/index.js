@@ -40,7 +40,7 @@ const BottomTab = () => {
           ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="Home-a"
         component={HomeScreen}
         options={{
@@ -48,7 +48,7 @@ const BottomTab = () => {
             <AntDesignIcon name="aliwangwang" size={25} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="Cart"
         component={CartScreen}
