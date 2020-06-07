@@ -22,19 +22,25 @@ export const styles = StyleSheet.create({
   },
   productInfo: {
     padding: 20,
+    height: 120,
   },
   productCate: {
-    fontSize: 20,
+    fontSize: 15,
+    color: '#ffffff',
+    fontWeight: 'bold',
+  },
+  productName: {
+    fontSize: 25,
     color: '#ffffff',
     fontWeight: 'bold',
     textTransform: 'capitalize',
   },
-  productName: {},
-  productPrice: {},
+  productPrice: {
+    color: '#ffffff',
+  },
   productImg: {
     width: '120%',
     height: 120,
     transform: [{rotate: '-30deg'}],
   },
-  iconHeart: {},
 });

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {Animated, Image, Text, View} from 'react-native';
+import {Animated, Image, SafeAreaView, Text, View} from 'react-native';
 import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/AntDesign';
 import {useDispatch, useSelector} from 'react-redux';
 import HeaderComponent from '../../components/Header';
 import {actFetchCategoriest} from '../../redux/actions';
@@ -10,10 +9,9 @@ import {PRODUCTS} from './temp_product';
 
 const HomeScreen = props => {
   const dispatch = useDispatch();
-
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [fadeAnim] = useState(new Animated.Value(0));
-  const [slideAnim] = useState(new Animated.Value(0));
+  const [slideAnim] = useState(new Animated.Value(-200));
   const categoryCollections = useSelector(
     state => state.category.categoryCollections,
   );
@@ -32,11 +30,12 @@ const HomeScreen = props => {
       tension: 1,
     }).start();
   }, [dispatch]);
-  const handdleChangeCategory = id => {
+
+  const handleChangeCategory = id => {
     setSelectedCategory(id);
   };
   return (
-    <View>
+    <SafeAreaView>
       <HeaderComponent title="Discover" />
       <View style={styles.categoryContainer}>
         <FlatList
@@ -45,15 +44,16 @@ const HomeScreen = props => {
           horizontal
           renderItem={({item, index}) => {
             const isSelected = item.id === selectedCategory;
+
             const categoryNameStyle = isSelected
               ? {...styles.categoryName, ...styles.active}
               : styles.categoryName;
+
             return (
               <TouchableOpacity
-                onPress={() => handdleChangeCategory(item.id)}
+                onPress={() => handleChangeCategory(item.id)}
                 style={styles.categoryItem}>
                 <Text style={categoryNameStyle}>{item.category}</Text>
-                <Image source />
               </TouchableOpacity>
             );
           }}
@@ -68,23 +68,28 @@ const HomeScreen = props => {
             <Animated.View
               style={{
                 ...styles.productContainer,
-                opacity: fadeAnim,
-                transform: [{rotate: -200}],
+                opacity: 1,
+                transform: [{translateY: slideAnim}],
               }}>
               <View style={styles.productInfo}>
                 <Text style={styles.productCate}>
                   {item.categories[0].category}
                 </Text>
-                <Text style={styles.productName}>{item.name}</Text>
-                <Text style={styles.productPrice}>{item.price}</Text>
-                <Image source={{uri: item.image}} style={styles.productImg} />
-                <Icon name="hearto" size={25} style={styles.iconHeart} />
+                <Text style={styles.productName}>
+                  {item.name
+                    .toLowerCase()
+                    .replace(item.categories[0].category.toLowerCase(), '')
+                    .trim()}
+                </Text>
+                <Text style={styles.productPrice}>${item.price}</Text>
               </View>
+              <Image source={{uri: item.image}} style={styles.productImg} />
+              {/* <Icon name="hearto" style={styles.iconHeart} /> */}
             </Animated.View>
           )}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 export default HomeScreen;
