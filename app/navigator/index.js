@@ -10,6 +10,7 @@ import SignInScreen from '../screens/SignIn';
 import ProductDetailScreen from '../screens/ProductDetail';
 import CategoryScreen from '../screens/Category';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import StoreScreen from '../screens/Stores';
 
 const Tabs = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -40,15 +41,15 @@ const BottomTab = () => {
           ),
         }}
       />
-      {/* <Tabs.Screen
-        name="Home-a"
-        component={HomeScreen}
+      <Tabs.Screen
+        name="googlemap"
+        component={StoreScreen}
         options={{
           tabBarIcon: ({color}) => (
             <AntDesignIcon name="aliwangwang" size={25} color={color} />
           ),
         }}
-      /> */}
+      />
       <Tabs.Screen
         name="Cart"
         component={CartScreen}

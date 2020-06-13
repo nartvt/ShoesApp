@@ -1,24 +1,25 @@
-import React, {useEffect, useState} from 'react';
-import {Text, View, Animated, Image} from 'react-native';
-import {styles} from './styles';
+import React, { useEffect, useState } from 'react';
+import { Animated, Image, Text, View } from 'react-native';
+import { styles } from './styles';
 
 const FeatureProductItem = props => {
   const {item, isCurrent} = props;
-
   const [flipAnim] = useState(new Animated.Value(0));
   const [widthAnim] = useState(new Animated.Value(220));
   const [heightAnim] = useState(new Animated.Value(300));
+
   useEffect(() => {
     if (isCurrent) {
-      // make animation
+      //make animation
       Animated.timing(widthAnim, {
-        toValue: 80,
+        toValue: 300,
         duration: 300,
-      });
+      }).start();
+
       Animated.timing(heightAnim, {
-        toValue: 80,
+        toValue: 330,
         duration: 300,
-      });
+      }).start();
 
       Animated.sequence([
         Animated.timing(flipAnim, {
@@ -33,21 +34,35 @@ const FeatureProductItem = props => {
           tension: 1,
         }),
       ]).start();
+    } else {
+      Animated.timing(widthAnim, {
+        toValue: 220,
+        duration: 300,
+      }).start();
+
+      Animated.timing(heightAnim, {
+        toValue: 300,
+        duration: 300,
+      }).start();
     }
-  }, [isCurrent, flipAnim, widthAnim, heightAnim]);
+  }, [isCurrent]);
+
   return (
     <Animated.View
       style={{
         ...styles.productContainer,
-        opacity: 1,
         transform: [
           {
             rotateY: flipAnim.interpolate({
               inputRange: [0, 1],
-              outputRange: [0, 80],
+              outputRange: ['0deg', '80deg'],
             }),
           },
         ],
+        width: widthAnim,
+        height: heightAnim,
+        // opacity: fadeAnim,
+        // transform: [{translateY: slideAnim}],
       }}>
       <View style={styles.productInfo}>
         <Text style={styles.productCate}>{item.categories[0].category}</Text>
