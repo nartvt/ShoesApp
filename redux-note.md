@@ -51,3 +51,22 @@ moment.js
 
 ## From React Native 0.60 and higher, linking is automatic. So you don't need to run react-native link.
 -- react native slash screen
+
+# 2020/06/07
+# memo(shouldComponentUpdate se quyet dinh khi nao 1 component dc render), useEffect, useCallBack
+how to use memo ? => export default memo(component name);
+
+const {state,setState} = useState(1);
+
+# if render class component will render only into render return
+# if render function component, if use useEffect will render all of that function component,
+example const callSum = useEffect(()=>{
+
+},[])
+# that is not nessary, that is a reason for useCallBack will create snapshot and 
+# => render only one time of function
+
+example const callSum = useCallBack(()=>{
+},[state])
+
+# facebook SDK, google map
